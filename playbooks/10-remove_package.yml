@@ -1,0 +1,13 @@
+# 10) Remove Package
+#--- Start ---#
+---
+- name: Remove Package
+  hosts: localhost
+  become: true
+  tasks:
+  - name: Remove xinetd
+    package:
+      name: xinetd
+      state: absent
+...
+#--- End ---#

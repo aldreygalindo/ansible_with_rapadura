@@ -1,0 +1,139 @@
+Examples of Inventory types
+
+1) Static without groups
+
+#--- Start ---#
+app1.example.com
+db1.example.com
+#--- End ---#
+
+$ ansible ungrouped --list-hosts
+  hosts (2):
+    app1.example.com
+    db1.example.com
+
+$ ansible all --list-hosts
+  hosts (2):
+    app1.example.com
+    db1.example.com
+
+
+2) Static with ungroup and group
+
+#--- Start ---#
+app1.example.com
+[database]
+db1.example.com
+#--- End ---#
+
+$ ansible ungrouped --list-hosts
+  hosts (1):
+    app1.example.com
+$ ansible database --list-hosts
+  hosts (1):
+    db1.example.com
+$ ansible all --list-hosts
+  hosts (2):
+    app1.example.com
+    db1.example.com
+
+
+3) Static with groups
+
+#--- Start ---#
+[apps]
+app1.example.com
+
+[database]
+db1.example.com
+#--- End ---#
+
+$ ansible apps --list-hosts
+  hosts (1):
+    app1.example.com
+
+$ ansible database --list-hosts
+  hosts (1):
+    db1.example.com
+
+$ ansible all --list-hosts
+  hosts (2):
+    app1.example.com
+    db1.example.com
+
+
+4) Static with range groups  
+
+#--- Start ---#
+[apps]
+app[1-7].example.com
+
+[database]
+db[3:5].example.com
+#--- End ---#
+
+$ ansible apps --list-hosts
+  hosts (7):
+    app1.example.com
+    app2.example.com
+    app3.example.com
+    app4.example.com
+    app5.example.com
+    app6.example.com
+    app7.example.com
+
+$ ansible database --list-hosts
+  hosts (3):
+    db3.example.com
+    db4.example.com
+    db5.example.com
+
+
+5) Static with children groups
+
+#--- Start ---#
+[sao_bernardo]
+centro
+alvarenga
+
+[sao_paulo]
+itaim-bibi.example.com
+belav-ista.example.com
+vila-mariana.example
+
+[estado_sao_paulo:children]
+sao_paulo
+sao_bernardo
+
+[brasil:children]
+estado_sao_paulo
+#--- End ---#
+
+$ ansible sao_paulo --list-hosts
+  hosts (3):
+    itaim-bibi.example.com
+    belav-ista.example.com
+    vila-mariana.example
+
+$ ansible sao_bernardo --list-hosts
+  hosts (2):
+    centro
+    alvarenga
+
+$ ansible estado_sao_paulo --list-hosts
+  hosts (5):
+    itaim-bibi.example.com
+    belav-ista.example.com
+    vila-mariana.example
+    centro
+    alvarenga
+
+$ ansible brasil --list-hosts
+  hosts (5):
+    itaim-bibi.example.com
+    belav-ista.example.com
+    vila-mariana.example
+    centro
+    alvarenga
+
+

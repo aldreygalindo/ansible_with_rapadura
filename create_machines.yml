@@ -1,0 +1,16 @@
+---
+- name: Create Machines in Beaker
+  hosts: ibm
+  remote_user: root
+  tasks:
+    - name: Install Packages
+      package:
+        name: 
+          - '@Virtualization Host'
+          - vim
+          - rsync
+          - wget
+          - virt-install
+        state: present
+
+...

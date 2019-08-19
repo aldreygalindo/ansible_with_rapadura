@@ -1,0 +1,15 @@
+# 15) Create File
+#--- Start ---#
+---
+- name: Create File
+  hosts: localhost
+  become: true
+  vars:
+    indexhtml: "/var/www/html/index.html"
+  tasks:
+  - name: "Create {{ indexhtml }}"
+    copy:
+      content: "<h1>My index.html by Ansible</h1>"
+      dest: "{{ indexhtml }}"
+...
+#--- End ---#

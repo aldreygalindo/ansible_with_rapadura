@@ -1,0 +1,50 @@
+Examples of Playbooks
+
+# 1) Install Package
+#--- Start ---#
+---
+- name: Install Package
+  hosts: localhost
+  tasks:
+  - name: Install wget
+    package:
+      name: wget
+      state: present
+...
+#--- End ---#
+
+
+# 2) Remove Package
+#--- Start ---#
+---
+- name: Install Package
+  hosts: localhost
+  tasks:
+  - name: Install wget
+    package:
+      name: wget
+      state: present
+...
+#--- End ---#
+
+
+# 3) Install Packages
+#--- Start ---#
+---
+- name: Install Package
+  hosts: localhost
+  tasks:
+  - name: Install wget and rsync
+    package:
+      name: 
+        - wget
+        - rsync
+      state: present
+...
+#--- End ---#
+
+
+
+
+
+

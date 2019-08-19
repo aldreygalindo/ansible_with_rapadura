@@ -1,0 +1,16 @@
+# 13) Allow Service
+#--- Start ---#
+---
+- name: Allow Service
+  hosts: localhost
+  become: true
+  tasks:
+  - name: Allow http and https
+  - firewalld:
+      service:
+        - http
+        - https
+      permanent: yes
+      state: enabled
+...
+#--- End ---#

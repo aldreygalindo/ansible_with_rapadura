@@ -1,0 +1,16 @@
+# 14) Deny Service
+#--- Start ---#
+---
+- name: Deny Service
+  hosts: localhost
+  become: true
+  tasks:
+  - name: Deny http and https
+  - firewalld:
+      service:
+        - http
+        - https
+      permanent: yes
+      state: enabled
+...
+#--- End ---#

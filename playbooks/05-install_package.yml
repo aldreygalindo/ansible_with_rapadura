@@ -1,0 +1,13 @@
+# 5) Install Package
+#--- Start ---#
+---
+- name: Install Package
+  hosts: localhost
+  become: true
+  tasks:
+  - name: Install xinetd
+    package:
+      name: xinetd
+      state: latest
+...
+#--- End ---#

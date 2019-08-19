@@ -1,0 +1,14 @@
+# 7) Start Service
+#--- Start ---#
+---
+- name: Start Service
+  hosts: localhost
+  become: true
+  tasks:
+  - name: Start httpd
+    service:
+      name: httpd
+      state: started
+      enabled: true
+...
+#--- End ---#

@@ -1,0 +1,15 @@
+# 3) Install Packages
+#--- Start ---#
+---
+- name: Install Package
+  hosts: localhost
+  become: true
+  tasks:
+  - name: Install wget and rsync
+    package:
+      name: 
+        - wget
+        - rsync
+      state: present
+...
+#--- End ---#

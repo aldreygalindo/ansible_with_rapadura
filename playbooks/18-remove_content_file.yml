@@ -1,0 +1,18 @@
+# 15) Remove content
+#--- Start ---#
+---
+- name: Remove content
+  hosts: localhost
+  become: true
+  vars:
+    indexhtml: "/var/www/html/index.html"
+  tasks:
+  - name: "Remove content {{ indexhtml }}"
+    blockinfile:
+      path: "{{ indexhtml }}"
+      state: absent
+      block: |
+      <h1>Welcome to {{ ansible_hostname }}</h1>
+      <p>Last updated on {{ ansible_date_time.iso8601 }}</p>
+...
+#--- End ---#

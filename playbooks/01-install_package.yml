@@ -1,0 +1,13 @@
+# 1) Install Package
+#--- Start ---#
+---
+- name: Install Package
+  hosts: localhost
+  become: true
+  tasks:
+  - name: Install wget
+    package:
+      name: wget
+      state: present
+...
+#--- End ---#

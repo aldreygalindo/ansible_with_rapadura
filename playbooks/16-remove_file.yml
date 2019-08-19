@@ -1,0 +1,15 @@
+# 16) Remove
+#--- Start ---#
+---
+- name: Remove File
+  hosts: localhost
+  become: true
+  vars:
+    indexhtml: "/var/www/html/index.html"
+  tasks:
+  - name: "Remove {{ indexhtml }}"
+    file:
+      path: "{{ indexhtml }}"
+      state: absent
+...
+#--- End ---#

@@ -1,0 +1,13 @@
+# 2) Remove Package
+#--- Start ---#
+---
+- name: Remove Package
+  hosts: localhost
+  become: true
+  tasks:
+  - name: Remove wget
+    package:
+      name: wget
+      state: absent
+...
+#--- End ---#

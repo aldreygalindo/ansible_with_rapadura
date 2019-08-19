@@ -1,0 +1,12 @@
+Examples of Ad Hoc
+
+1) ping 
+$ ansible localhost -m ping
+
+2) setup
+$ ansible localhost -m setup
+
+3) copy
+$ ansible localhost -m copy -a 'content="My first file via ansible" dest=/tmp/first.txt'
+
+

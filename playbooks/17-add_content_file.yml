@@ -1,0 +1,18 @@
+# 17) Add Content
+#--- Start ---#
+---
+- name: Add Content
+  hosts: localhost
+  become: true
+  vars:
+    indexhtml: "/var/www/html/index.html"
+  tasks:
+  - name: "Add Content {{ indexhtml }}"
+    blockinfile:
+      path: "{{ indexhtml }}"
+      insertafter: "<h1>My index.html by Ansible</h1>"
+      block: |
+      <h1>Welcome to {{ ansible_hostname }}</h1>
+      <p>Last updated on {{ ansible_date_time.iso8601 }}</p>
+...
+#--- End ---#
