@@ -1,10 +1,9 @@
-Examples of Playbooks
-
 # 1) Install Package
 #--- Start ---#
 ---
 - name: Install Package
   hosts: localhost
+  become: true
   tasks:
   - name: Install wget
     package:
@@ -12,27 +11,27 @@ Examples of Playbooks
       state: present
 ...
 #--- End ---#
-
 
 # 2) Remove Package
 #--- Start ---#
 ---
-- name: Install Package
+- name: Remove Package
   hosts: localhost
+  become: true
   tasks:
-  - name: Install wget
+  - name: Remove wget
     package:
       name: wget
-      state: present
+      state: absent
 ...
 #--- End ---#
-
 
 # 3) Install Packages
 #--- Start ---#
 ---
 - name: Install Package
   hosts: localhost
+  become: true
   tasks:
   - name: Install wget and rsync
     package:
@@ -43,8 +42,237 @@ Examples of Playbooks
 ...
 #--- End ---#
 
+# 2) Remove Package
+#--- Start ---#
+---
+- name: Install Package
+  hosts: localhost
+  become: true
+  tasks:
+  - name: Install wget
+    package:
+      name: wget
+      state: absent
+...
+#--- End ---#
 
+# 5) Install Package
+#--- Start ---#
+---
+- name: Install Package
+  hosts: localhost
+  become: true
+  tasks:
+  - name: Install xinetd
+    package:
+      name: xinetd
+      state: latest
+...
+#--- End ---#
 
+# 6) Remove Package
+#--- Start ---#
+---
+- name: Remove Package
+  hosts: localhost
+  become: true
+  tasks:
+  - name: Remove xinetd
+    package:
+      name: xinetd
+      state: absent
+...
+#--- End ---#
 
+# 7) Start Service
+#--- Start ---#
+---
+- name: Start Service
+  hosts: localhost
+  become: true
+  tasks:
+  - name: Start xinetd
+    service:
+      name: xinetd
+      state: started
+      enabled: true
+...
+#--- End ---#
 
+# 8) Stop Service
+#--- Start ---#
+---
+- name: Stop Service
+  hosts: localhost
+  become: true
+  tasks:
+  - name: Start xinetd
+    service:
+      name: xinetd
+      state: started
+      enabled: false
+...
+#--- End ---#
+
+# 9) Install Package
+#--- Start ---#
+---
+- name: Install Package
+  hosts: localhost
+  become: true
+  tasks:
+  - name: Install httpd
+    package:
+      name: httpd
+      state: latest
+...
+#--- End ---#
+
+# 10) Remove Package
+#--- Start ---#
+---
+- name: Remove Package
+  hosts: localhost
+  become: true
+  tasks:
+  - name: Remove xinetd
+    package:
+      name: xinetd
+      state: absent
+...
+#--- End ---#
+
+# 7) Start Service
+#--- Start ---#
+---
+- name: Start Service
+  hosts: localhost
+  become: true
+  tasks:
+  - name: Start httpd
+    service:
+      name: httpd
+      state: started
+      enabled: true
+...
+#--- End ---#
+
+# 8) Stop Service
+#--- Start ---#
+---
+- name: Stop Service
+  hosts: localhost
+  become: true
+  tasks:
+  - name: Start httpd
+    service:
+      name: httpd
+      state: started
+      enabled: false
+...
+#--- End ---#
+
+# 13) Allow Service
+#--- Start ---#
+---
+- name: Allow Service
+  hosts: localhost
+  become: true
+  tasks:
+  - name: Allow http and https
+  - firewalld:
+      service:
+        - http
+        - https
+      permanent: yes
+      state: enabled
+...
+#--- End ---#
+
+# 14) Deny Service
+#--- Start ---#
+---
+- name: Deny Service
+  hosts: localhost
+  become: true
+  tasks:
+  - name: Deny http and https
+  - firewalld:
+      service:
+        - http
+        - https
+      permanent: yes
+      state: enabled
+...
+#--- End ---#
+
+# 15) Create File
+#--- Start ---#
+---
+- name: Create File
+  hosts: localhost
+  become: true
+  vars:
+    indexhtml: "/var/www/html/index.html"
+  tasks:
+  - name: "Create {{ indexhtml }}"
+    copy:
+      content: "<h1>My index.html by Ansible</h1>"
+      dest: "{{ indexhtml }}"
+...
+#--- End ---#
+
+# 16) Remove
+#--- Start ---#
+---
+- name: Remove File
+  hosts: localhost
+  become: true
+  vars:
+    indexhtml: "/var/www/html/index.html"
+  tasks:
+  - name: "Remove {{ indexhtml }}"
+    file:
+      path: "{{ indexhtml }}"
+      state: absent
+...
+#--- End ---#
+
+# 17) Add Content
+#--- Start ---#
+---
+- name: Add Content
+  hosts: localhost
+  become: true
+  vars:
+    indexhtml: "/var/www/html/index.html"
+  tasks:
+  - name: "Add Content {{ indexhtml }}"
+    blockinfile:
+      path: "{{ indexhtml }}"
+      insertafter: "<h1>My index.html by Ansible</h1>"
+      block: |
+      <h1>Welcome to {{ ansible_hostname }}</h1>
+      <p>Last updated on {{ ansible_date_time.iso8601 }}</p>
+...
+#--- End ---#
+
+# 15) Remove content
+#--- Start ---#
+---
+- name: Remove content
+  hosts: localhost
+  become: true
+  vars:
+    indexhtml: "/var/www/html/index.html"
+  tasks:
+  - name: "Remove content {{ indexhtml }}"
+    blockinfile:
+      path: "{{ indexhtml }}"
+      state: absent
+      block: |
+      <h1>Welcome to {{ ansible_hostname }}</h1>
+      <p>Last updated on {{ ansible_date_time.iso8601 }}</p>
+...
+#--- End ---#
 
