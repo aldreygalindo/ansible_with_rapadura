@@ -1,0 +1,16 @@
+# 3) Remove Users
+#--- Start ---#
+---
+- name: Remove Users
+  hosts: localhost
+  become: true
+  vars_files:
+    - users.yml
+  tasks:
+  - name: "Remove"
+    user:
+      name: "{{ item.user }}"
+      state: absent
+    loop: "{{ users }}"
+...
+#--- End ---#

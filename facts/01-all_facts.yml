@@ -1,0 +1,12 @@
+# 1) Print All Facts
+#--- Start ---#
+---
+- name: Print All Facts
+  hosts: localhost
+  become: true
+  tasks:
+  - name: Debug print all facts
+    debug:
+      var: ansible_facts
+...
+#--- End ---#

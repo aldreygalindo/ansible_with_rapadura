@@ -1,0 +1,28 @@
+# 1) Install Package
+#--- Start ---#
+---
+- name: Install Package
+  hosts: localhost
+  become: true
+  vars:
+    pack: xinetd
+  tasks:
+  - name: "Install {{ pack }}"
+    package:
+      name: "{{ pack }}"
+      state: latest
+    notify:
+     - start xinetd
+     - audit xinetd
+  handlers:
+    - name: start xinetd
+      service: 
+        name: "{{ pack }}"
+        state: started
+        enabled: true
+    - name: audit xinetd
+      copy:
+        content: "Added xinetd\n"
+        dest: /tmp/xinetd.enable
+...
+#--- End ---#

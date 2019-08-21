@@ -1,0 +1,28 @@
+---
+# tasks file for roles/my_first_role
+- name: "Install {{ my_first_role_package_web }}"
+  package:
+    name: "{{ my_first_role_package_web }}"
+    state: latest
+
+- name: "Start {{ my_first_role_package_web }}"
+  service:
+    name: "{{ my_first_role_package_web }}"
+    state: started
+    enabled: true
+
+- name: Allow http and https
+- firewalld:
+    service:
+      - http
+      - https
+    permanent: yes
+    state: enabled
+
+- name: "Add Content {{ my_first_role_indexhtml }}"
+  blockinfile:
+    path: "{{ my_first_role_package_web_indexhtml }}"
+    insertafter: "<h1>My index.html by Ansible</h1>"
+    block: |
+    <h1>Welcome to {{ ansible_hostname }}</h1>
+    <p>Last updated on {{ ansible_date_time.iso8601 }}</p>

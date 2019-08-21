@@ -1,0 +1,12 @@
+# 1) Print Default ipv4 Facts
+#--- Start ---#
+---
+- name: Print Default ipv4
+  hosts: localhost
+  become: true
+  tasks:
+  - name: default_ipv4 fact
+    debug:
+      msg: "The default IPV4 address of {{ ansible_facts.default_ipv4.address }}"
+...
+#--- End ---#

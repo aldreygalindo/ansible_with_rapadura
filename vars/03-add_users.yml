@@ -1,0 +1,19 @@
+# 3) Add Users
+#--- Start ---#
+---
+- name: Add Users
+  hosts: localhost
+  become: true
+  vars_files:
+    - users.yml
+  tasks:
+  - name: "Add"
+    user:
+      name: "{{ item.user }}"
+      comment: "{{ item.comment }}"
+      password: "{{ item.password | password_hash('sha512') }}"
+      group: wheel
+      state: present
+    loop: "{{ users }}"
+...
+#--- End ---#

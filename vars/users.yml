@@ -1,0 +1,8 @@
+users:
+  - user: testuser01
+    comment: "Only test user 01 "
+    password: testuser01
+  - user: testuser02
+    comment: "Only test user 02"
+    password: testuser02
+

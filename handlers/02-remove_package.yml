@@ -1,0 +1,22 @@
+# 6) Remove Package
+#--- Start ---#
+---
+- name: Remove Package
+  hosts: localhost
+  become: true
+  vars:
+    pack: xinetd
+  tasks:
+  - name: "Remove {{ pack }}"
+    package:
+      name: "{{ pack }}"
+      state: absent
+    notify:
+     - remove xinetd
+  handlers:
+    - name: remove xinetd
+      copy:
+        content: "Removed xinetd\n"
+        dest: /tmp/xinetd.disabled
+...
+#--- End ---#

@@ -1,0 +1,5 @@
+---
+# vars file for roles/my_first_role
+my_first_role_package_web: httpd
+my_first_role_indexhtml: /var/www/html/index.html
+
